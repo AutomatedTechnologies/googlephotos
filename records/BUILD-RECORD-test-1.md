@@ -1,0 +1,12 @@
+# BUILD RECORD — googlephotos-test-1
+
+Photos — Academy Build, first CI build and first Distro listing.
+
+- **Source:** `AutomatedTechnologies/googlephotos` @ `eb887f5bf458d85a4edd4ec16146d57f013fc15a` (branches `main` + `build-test` at the same commit).
+- **CI:** workflow "Google Photos test build" (`.github/workflows/build-googlephotos.yml`), run **44524299201**, run_number 1, **SUCCESS on re-run attempt 2** (macos-15). Attempt 1 was cancelled in queue — no runner assigned within 15 minutes, zero steps executed — and the re-run kept run_number 1. The standing two-trigger race also fired: branch creation produced the push run and a `workflow_dispatch` (run 44524300083, run_number 2) finished first, publishing a prerelease `googlephotos-test-2` from the identical commit; that prerelease and its tag were deleted in the same tranche, so this line carries exactly one published build.
+- **Artifact:** prerelease `googlephotos-test-1` (release id 451339268, published 2026-11-19T12:50:20Z), asset `Photos-test.zip` — **43,498 B, SHA-256 `97e6d310ac257894bbc1e2526ff1e56df62457c08208cf7d0cfa4528675e3f6f`** (fresh-download hash == GitHub's asset digest).
+- **Dissection (fresh download):** `Photos.app` — bundle `com.detroitautomationacademy.googlephotos`, version 1.0 (`googlephotos-test-1`), `LSMinimumSystemVersion` 10.13, `CFBundleIconFile` Photos with `Photos.icns` (75,026 B, iconutil from the committed monochrome iconset), executable Mach-O 64-bit x86_64 (35,624 B), zip census 7 entries. Info.plist carries `com.detroitautomationacademy.audit` {Disassembled, Scanned, Recompiled: true, Authority: Detroit Automation Academy, Date: 2026-11-19} per Distro files/08.
+- **Catalog:** Singular Reference `changes/0071` (registry commit `ddf6774e`, snapshot v11-0071); site commit `6c66d437`. Served `store/catalog.json` == registry render byte-for-byte (55,987 B, SHA-256 `03dedcc19f4fa279bc715c0e2861eba5630f242ea744e9e57ba715d248f06328`): entry `googlephotos` at **testing**; the 12 pre-existing entries unchanged.
+- **Open:** S4 — the owner's Air sitting (install from Distro at `testing`, Google sign-in, browse). The named risk is Google's embedded-web-view sign-in refusal; the rig decides. Nothing flips to `released` without the owner's verdict.
+
+BUILD STAMP — Built: 2026-11-19 · Build: googlephotos-test-1 (CI run 44524299201) · Agent: Minion · Authorized: J. Spencer Smith, directive of 2026-11-19 (Google Photos application from Distro)
