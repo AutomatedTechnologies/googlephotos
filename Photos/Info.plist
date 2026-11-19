@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Photos</string>
+	<key>CFBundleExecutable</key>
+	<string>Photos</string>
+	<key>CFBundleIconFile</key>
+	<string>Photos</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.detroitautomationacademy.googlephotos</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Photos</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.13</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>com.detroitautomationacademy.audit</key>
+	<dict>
+		<key>Disassembled</key>
+		<true/>
+		<key>Scanned</key>
+		<true/>
+		<key>Recompiled</key>
+		<true/>
+		<key>Authority</key>
+		<string>Detroit Automation Academy</string>
+		<key>Date</key>
+		<string>2026-11-19</string>
+	</dict>
+</dict>
+</plist>

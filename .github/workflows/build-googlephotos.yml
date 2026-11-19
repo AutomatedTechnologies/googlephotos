@@ -1,0 +1,72 @@
+name: Google Photos test build
+
+on:
+  push:
+    branches: [build-test]
+  workflow_dispatch:
+
+# The publish step creates a GitHub Release with GITHUB_TOKEN (Distro-line
+# precedent, 2026-11-07: default token needs contents: write declared).
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build app icon (iconutil, from the committed iconset)
+        run: |
+          iconutil -c icns Photos/Resources/AppIcon.iconset -o Photos/Resources/Photos.icns
+          ls -la Photos/Resources/Photos.icns
+
+      - name: Build app (make app — clang, unsigned, x86_64, 10.13 floor)
+        run: |
+          set -o pipefail
+          make app 2>&1 | tee clang.log
+          cp Photos/Resources/Photos.icns Photos.app/Contents/Resources/
+          ls -la Photos.app/Contents/Resources/
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-log
+          path: clang.log
+
+      - name: Stamp build version and package app as zip
+        if: success()
+        run: |
+          APP="Photos.app"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion googlephotos-test-${{ github.run_number }}" "$APP/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$APP/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$APP/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$APP/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :LSMinimumSystemVersion" "$APP/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :com.detroitautomationacademy.audit" "$APP/Contents/Info.plist"
+          file "$APP/Contents/MacOS/Photos"
+          ditto -c -k --keepParent "$APP" Photos-test.zip
+          ls -la Photos-test.zip
+
+      - name: Upload test build zip (survival copy)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: googlephotos-test-zip
+          path: Photos-test.zip
+
+      - name: Publish prerelease with test build
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BUILT=$(date -u '+%Y-%m-%d %H:%M UTC')
+          NOTES="Internal test build of Photos — Academy Build, the Detroit Automation Academy's native macOS client for Google Photos: a WKWebView window on photos.google.com with a desktop Safari user agent and a persistent WKWebsiteDataStore, so the Google session survives relaunches; Google hosts stay in the window, every other link opens in the default browser; SDS-8 welcome on first launch. Academy-original clean-room code — no Google code or assets; 'Google Photos' is named only to say what the application is a client for. Publisher: Detroit Automation Academy. Unsigned test build — not gate-cleared, not yet verified on the High Sierra rig; install from the Distro catalog (testing). Named open risk: Google sign-in inside embedded web views can be refused ('this browser or app may not be secure') — the rig session decides.
+
+          BUILD STAMP — Built: $BUILT · Build: googlephotos-test-${{ github.run_number }} (CI run ${{ github.run_id }}) · Agent: Minion · Authorized: J. Spencer Smith, directive of 2026-11-19 (Google Photos application from Distro)"
+          gh release create googlephotos-test-${{ github.run_number }} Photos-test.zip \
+            --prerelease \
+            --title "Google Photos test build ${{ github.run_number }}" \
+            --notes "$NOTES"
