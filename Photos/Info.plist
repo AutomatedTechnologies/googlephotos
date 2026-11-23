@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Photos</string>
+	<string>Academy Photos</string>
 	<key>CFBundleExecutable</key>
-	<string>Photos</string>
+	<string>Academy Photos</string>
 	<key>CFBundleIconFile</key>
 	<string>Photos</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Photos</string>
+	<string>Academy Photos</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -39,7 +39,7 @@
 		<key>Authority</key>
 		<string>Detroit Automation Academy</string>
 		<key>Date</key>
-		<string>2026-11-19</string>
+		<string>2026-11-23</string>
 	</dict>
 </dict>
 </plist>
