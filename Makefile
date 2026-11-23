@@ -5,7 +5,7 @@
 #
 #   make check   syntax-check every source against the MacOSX10.13 SDK
 #                (Linux VM recipe per estate TOOLS.md; no link, no run)
-#   make app     assemble Photos.app (macOS only)
+#   make app     assemble Academy Photos.app (macOS only)
 #
 # Memory model is manual reference counting (the sources retain/release
 # explicitly), so neither target passes -fobjc-arc.
@@ -37,10 +37,10 @@ app:
 	@if [ "$$(uname)" != "Darwin" ]; then \
 		echo "make app requires macOS (system clang + AppKit/WebKit)" >&2; exit 1; \
 	fi
-	rm -rf Photos.app
-	mkdir -p Photos.app/Contents/MacOS Photos.app/Contents/Resources
+	rm -rf "Academy Photos.app"
+	mkdir -p "Academy Photos.app/Contents/MacOS" "Academy Photos.app/Contents/Resources"
 	$(CLANG) -target x86_64-apple-macos10.13 -IPhotos \
 		-framework AppKit -framework Foundation -framework WebKit \
-		-o Photos.app/Contents/MacOS/Photos $(SOURCES)
-	cp Photos/Info.plist Photos.app/Contents/Info.plist
-	@echo "Photos.app assembled — launch with: open Photos.app"
+		-o "Academy Photos.app/Contents/MacOS/Academy Photos" $(SOURCES)
+	cp Photos/Info.plist "Academy Photos.app/Contents/Info.plist"
+	@echo "Academy Photos.app assembled — launch with: open \"Academy Photos.app\""
