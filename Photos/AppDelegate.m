@@ -42,7 +42,7 @@ static NSString * const kPhotosAcademyWelcomeShownKey = @"PhotosAcademyWelcomeSh
                                                      styleMask:style
                                                        backing:NSBackingStoreBuffered
                                                          defer:NO];
-    [window setTitle:@"Photos"];
+    [window setTitle:@"Academy Photos"];
     [window setMinSize:NSMakeSize(720.0, 480.0)];
 
     PhotosWebViewController *controller = [[PhotosWebViewController alloc] init];
@@ -91,16 +91,16 @@ static NSString * const kPhotosAcademyWelcomeShownKey = @"PhotosAcademyWelcomeSh
     NSMenu *mainMenu = [[NSMenu alloc] initWithTitle:@"MainMenu"];
 
     // Application menu.
-    NSMenuItem *appItem = [[NSMenuItem alloc] initWithTitle:@"Photos" action:nil keyEquivalent:@""];
-    NSMenu *appMenu = [[NSMenu alloc] initWithTitle:@"Photos"];
-    [appMenu addItemWithTitle:@"About Photos" action:@selector(orderFrontStandardAboutPanel:) keyEquivalent:@""];
+    NSMenuItem *appItem = [[NSMenuItem alloc] initWithTitle:@"Academy Photos" action:nil keyEquivalent:@""];
+    NSMenu *appMenu = [[NSMenu alloc] initWithTitle:@"Academy Photos"];
+    [appMenu addItemWithTitle:@"About Academy Photos" action:@selector(orderFrontStandardAboutPanel:) keyEquivalent:@""];
     [appMenu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *welcomeItem = [[NSMenuItem alloc] initWithTitle:@"Welcome" action:@selector(showWelcome:) keyEquivalent:@""];
     [welcomeItem setTarget:self];
     [appMenu addItem:welcomeItem];
     [welcomeItem release];
     [appMenu addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit Photos" action:@selector(terminate:) keyEquivalent:@"q"];
+    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit Academy Photos" action:@selector(terminate:) keyEquivalent:@"q"];
     [appMenu addItem:quitItem];
     [quitItem release];
     [appItem setSubmenu:appMenu];
